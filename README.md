@@ -1,6 +1,6 @@
 # Spatial-MGCN: a novel multi-view graph convolutional network for identifying spatial domains with attention mechanism
 
-## Introduction
+## Abstract
 Motivation: Recent advances in spatial transcriptomics (ST) technologies have enabled gene expression profiles while preserving spatial context. Accurately identifying spatial domains, facilitating downstream analysis, require effectively integrating gene expression profiling and spatial information. Recently, an increasing number of computational methods have been developed for spatial domain detection. However, most existing methods fail to adaptively learn the complex relationship between gene expression and spatial information, which results in sub-optimal performance.
 
 Results: To address the above challenges, we propose a novel multi-view graph convolutional network (GCN) with attention mechanism named Spatial-MGCN for identifying spatial domains. In the framework, we first construct two neighbor graphs by leveraging gene expression profiles and spatial information, respectively. Then we design a multi-view GCN encoder to extract unique embeddings from the feature and spatial graphs, respectively, as well as their shared embeddings by combining both graphs. Finally, a zero-inflated negative binomial decoder is adopted to reconstruct the original expression matrix by capturing the global probability distribution of gene expression profiles. Furthermore, we incorporate a spatial regularization constraint into the features learning to preserve spatial neighbor information in an end-to-end manner. The experimental results show that Spatial-MGCN outperforms state-of-the-art methods consistently in several tasks, including identifying spatial domains, identifying tissue structures with varying spatial resolutions, enhancing gene expression patterns, and dissecting cancer tissue heterogeneity.
@@ -18,7 +18,7 @@ scipy==1.8.1
 
 stlearn==0.4.8
 
-pytorch== 1.11.0
+pytorch==1.11.0
 
 torch_geometric==2.1.0
 
@@ -48,24 +48,7 @@ For 10x Spatial Transcripts (ST) datasets, files should be put in the same struc
   >> filtered_feature_bc_matrix.h5 # gene expression data
 
 
-### 2 Data Preprocessing and Graph Construction
-
-Run ***Spatial-MGCN/DLPFC_generate_data.py*** to preprocess the raw DLPFC data:
-
-`python DLPFC_generate_data.py`
-
-Augments:
-
-**--savepath**: the path to save the generated file.
-
-For dealing other ST datasets, please modify the data name. 
-
----------------------------------------------------------------------------
-
-
-### 3 Run Spatial-MGCN 
-
-The Spatial-MGCN model is implemented in ***DLPFC_test.py***. We give examples on DLPFC datasets.
+### 2 Configuration
 
 The meaning of each argument in ***config.py*** is listed below.
 
@@ -100,9 +83,23 @@ The meaning of each argument in ***config.py*** is listed below.
 **--fdim**: the number of highly variable genes selected.
 
 
+
+### 3 Data Preprocessing and Graph Construction
+
+Run ***Spatial-MGCN/DLPFC_generate_data.py*** to preprocess the raw DLPFC data:
+
+`python DLPFC_generate_data.py`
+
+Augments:
+
+**--savepath**: the path to save the generated file.
+
+For dealing other ST datasets, please modify the data name. 
+
+
 ### 4 Usage
 
-For training your own model, run
+For training Spatial-MGCN model, run
 
 'python DLPFC_test.py'
 

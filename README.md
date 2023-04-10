@@ -129,4 +129,4 @@ The datasets used in this paper can be downloaded from the following websites. S
 
 ## Framework
 
-![image](https://github.com/cs-wangbo/Spatial-MGCN/tree/master/Spatial-MGCN/result/Spatial-MGCN.png)
+![model](https://github.com/cs-wangbo/Spatial-MGCN/tree/master/Spatial-MGCN/result/Spatial-MGCN.png)

@@ -127,6 +127,6 @@ The datasets used in this paper can be downloaded from the following websites. S
 
 (3) 10x Visium spatial transcriptomics dataset of human breast cancer https://support.10xgenomics.com/spatial-gene-expression/datasets/1.1.0/V1_Breast_Cancer_Block_A_Section_1
 
-## Framework
+## Method
 
-![model](https://github.com/cs-wangbo/Spatial-MGCN/tree/master/Spatial-MGCN/result/Spatial-MGCN.png)
+![model](https://github.com/cs-wangbo/Spatial-MGCN/blob/master/Spatial-MGCN/result/Spatial-MGCN.png)

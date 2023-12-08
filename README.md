@@ -1,5 +1,8 @@
 # Spatial-MGCN: a novel multi-view graph convolutional network for identifying spatial domains with attention mechanism
 
+![model](https://github.com/cs-wangbo/Spatial-MGCN/blob/master/Spatial-MGCN/result/Spatial-MGCN.png)
+
+
 ## Requirements 
 Python==3.8.13
 
@@ -23,7 +26,7 @@ matplotlib==3.5.3
 
 
 
-## Example.
+## Example
 
 ### 1 Raw data 
 
@@ -120,6 +123,8 @@ The datasets used in this paper can be downloaded from the following websites. S
 
 (3) 10x Visium spatial transcriptomics dataset of human breast cancer https://support.10xgenomics.com/spatial-gene-expression/datasets/1.1.0/V1_Breast_Cancer_Block_A_Section_1
 
-## Method
+Additionally, the data employed in this study has been uploaded to Zenodo https://zenodo.org/records/10279295
 
-![model](https://github.com/cs-wangbo/Spatial-MGCN/blob/master/Spatial-MGCN/result/Spatial-MGCN.png)
+## Citation
+
+Wang, Bo, et al. "Spatial-MGCN: a novel multi-view graph convolutional network for identifying spatial domains with attention mechanism." Briefings in Bioinformatics 24.5 (2023): bbad262.

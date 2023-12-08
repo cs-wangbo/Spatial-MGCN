@@ -127,4 +127,4 @@ Additionally, the data employed in this study has been uploaded to Zenodo https:
 
 ## Citation
 
-Wang, Bo, et al. "Spatial-MGCN: a novel multi-view graph convolutional network for identifying spatial domains with attention mechanism." Briefings in Bioinformatics 24.5 (2023): bbad262.
+Wang et al. Spatial-MGCN: a novel multi-view graph convolutional network for identifying spatial domains with attention mechanism. ***Briefings in Bioinformatics***, 2023, 24(5): bbad262.

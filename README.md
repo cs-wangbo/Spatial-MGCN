@@ -97,7 +97,7 @@ For dealing other ST datasets, please modify the data name.
 
 For training Spatial-MGCN model, run
 
-'python DLPFC_test.py'
+'python run_DLPFC.py'
 
 All results are saved in the result folder. We provide our results in the folder ***result*** for taking further analysis. 
 
@@ -107,7 +107,7 @@ All results are saved in the result folder. We provide our results in the folder
 
 For Human_Breast_Cancer and Mouse_Olfactory datasets, the running process is the same as above. You just need to run the command:
 
-'python HBC_test.py'
+'python run_HBC.py'
 
 'python MOB_test.py'
 

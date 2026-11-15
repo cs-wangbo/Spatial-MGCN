@@ -1,9 +1,3 @@
-﻿"""Fixed-epoch DLPFC evaluation, adapted from the original DLPFC_test.py.
-
-The model is trained for the number of epochs in the config and clustered
-once, after training. Reference labels are never read here; ARI must be
-computed separately by aligning predictions.csv to the benchmark metadata.
-"""
 import argparse
 import os
 import random
@@ -17,6 +11,7 @@ import pandas as pd
 import scipy.sparse as sp
 import torch
 from sklearn.cluster import KMeans
+from sklearn.metrics import adjusted_rand_score
 
 from config import Config
 from models import Spatial_MGCN
@@ -56,10 +51,10 @@ def zinb_loss(pi, disp, features, mean):
 
 def main():
     here = os.path.dirname(os.path.abspath(__file__))
-    parser = argparse.ArgumentParser(description='Fixed-epoch DLPFC evaluation.')
-    parser.add_argument('--input', required=True, help='Preprocessed Spatial_MGCN.h5ad for one DLPFC slice.')
-    parser.add_argument('--output', required=True, help='New directory for predictions and embedding.')
-    parser.add_argument('--clusters', required=True, type=int, help='Known number of spatial domains for this slice.')
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--input', default=os.path.join(here, '..', 'generate_data', 'DLPFC', '151507', 'Spatial_MGCN.h5ad'))
+    parser.add_argument('--output', default=os.path.join(here, 'result', 'DLPFC', '151507'))
+    parser.add_argument('--clusters', default=7, type=int)
     parser.add_argument('--config', default=os.path.join(here, 'config', 'DLPFC_fix.ini'))
     args = parser.parse_args()
 
@@ -101,7 +96,6 @@ def main():
         con_loss = consistency_loss(com1, com2)
         total_loss = config.alpha * gene_loss + config.beta * con_loss + config.gamma * reg_loss
         if epoch == config.epochs - 1:
-            # Same convention as the original train(): embedding before this update.
             output = emb.detach().cpu().numpy().copy()
         total_loss.backward()
         optimizer.step()
@@ -113,12 +107,21 @@ def main():
     labels = KMeans(n_clusters=args.clusters, n_init=10,
                     random_state=config.seed).fit_predict(output)
 
-    os.makedirs(args.output, exist_ok=False)
+    # ARI is computed only after the final clustering, for reporting only.
+    if 'ground' in adata.obs:
+        ari = float(adjusted_rand_score(adata.obs['ground'].astype(str).values, labels))
+        ari_text = '%.5f' % ari
+    else:
+        ari = float('nan')
+        ari_text = 'NA'
+
+    os.makedirs(args.output, exist_ok=True)
     pd.DataFrame({'barcode': list(adata.obs_names), 'cluster': labels}).to_csv(
         os.path.join(args.output, 'predictions.csv'), index=False)
     np.save(os.path.join(args.output, 'embedding.npy'), output)
     shutil.copyfile(args.config, os.path.join(args.output, 'config.ini'))
-    print('saved', args.output, 'n=%d clusters=%d' % (len(labels), args.clusters), flush=True)
+    print('saved %s n=%d clusters=%d ARI=%s' % (args.output, len(labels), args.clusters, ari_text),
+          flush=True)
 
 
 if __name__ == '__main__':

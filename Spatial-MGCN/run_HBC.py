@@ -43,11 +43,11 @@ def load_data(path):
 
 def main():
     here = os.path.dirname(os.path.abspath(__file__))
-    parser = argparse.ArgumentParser(description='Fixed-epoch HBC evaluation.')
-    parser.add_argument('--input', required=True, help='Preprocessed Human_Breast_Cancer Spatial_MGCN.h5ad.')
-    parser.add_argument('--output', required=True, help='New directory for predictions and embedding.')
-    parser.add_argument('--config', default=os.path.join(here, 'config', 'Human_Breast_Cancer__fix.ini'))
-    parser.add_argument('--plot', action='store_true', help='Save spatial cluster plot.')
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--input', default='../generate_data/Human_Breast_Cancer/Spatial_MGCN.h5ad')
+    parser.add_argument('--output', default='result/HBC')
+    parser.add_argument('--config', default='./config/Human_Breast_Cancer__fix.ini')
+    parser.add_argument('--plot', default=True)
     args = parser.parse_args()
 
     config = Config(args.config)
